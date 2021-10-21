@@ -6,14 +6,15 @@ import random
 import string
 import os
 from pymongo import message
-# from passlib.hash import bcrypt
+from passlib.hash import bcrypt
 import json
 import pymongo.database as mdb
+from bson.json_util import dumps
 from pymongo.errors import DuplicateKeyError
 from pydantic import BaseModel
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 
-JWT_SECRET = os.environ['JWT']
+JWT_SECRET = "heyS"
 
 oauth2_schema = OAuth2PasswordBearer(tokenUrl='token')
 
@@ -33,14 +34,14 @@ def get_db():
     finally:
         engine.close()
 
-# def authenticate_user(username: str, password: str, db):
-#     user = db['users'].find_one({"username": username})
-#     if not user:
-#         return False
-#     if not bcrypt.verify(password, user["password"]):
-#         return False
+def authenticate_user(username: str, password: str, db):
+    user = db['users'].find_one({"username": username})
+    if not user:
+        return False
+    if not bcrypt.verify(password, user["password"]):
+        return False
 
-#     return json.loads(dumps(user))
+    return json.loads(dumps(user))
 
 app = FastAPI(title="AutoClass", description="Youtube classroom")
 

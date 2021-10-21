@@ -1,0 +1,16 @@
+{
+  "name": "Kaizen",
+  "description": "companion to avoid your distraction",
+  "version": "1",
+  "icons": {
+    "128": "icon.png"
+  },
+  "content_scripts": [{
+    "matches": ["https://www.youtube.com/*","https://m.youtube.com/*"],
+    "js": ["inject.js"],
+    "run_at": "document_idle",
+    "all_frames": false
+  }],
+  "web_accessible_resources": ["feedreader.js"],
+  "manifest_version": 2
+}
