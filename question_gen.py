@@ -59,11 +59,11 @@ for i in set(proper):
 
 print(random.choice(final))
 
-# dictionary = PyDictionary()
-# # print(blob.tags)
-# gh = set()
+dictionary = PyDictionary()
+# print(blob.tags)
+gh = set()
 
-# seg = []
+seg = []
 # for i in blob.tags:
 #     if i[1] == 'JJ':
 #         if i not in gh:

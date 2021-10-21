@@ -16,17 +16,20 @@ try {
 
     document.getElementById("chips").style.display = "none";
 
+    document.getElementById("comments").style.display = "none";
+    document.getElementById("contents").style.display = "none";
+
     var extensionname = document.createElement("div");
     extensionname.classList.add("ext-title");
 
-    extensionname.innerText = "Kaizen";
+    extensionname.innerText = "AutoClass";
 
     var extensionbutton = document.createElement("div");
     extensionbutton.classList.add("ext-button");
     extensionbutton.innerHTML = `<label class="toggle">
     <input class="toggle-checkbox" type="checkbox">
     <div class="toggle-switch"></div>
-    <span class="toggle-label">Wi-fi</span>
+    <span class="toggle-label">Typically there is one operation called ______, that simply returns the element at the top of the stack?</span>
   </label>`;
 
     var checkform = document.createElement("div");
@@ -34,15 +37,15 @@ try {
     checkform.innerHTML = `<div class="form-container">
     <div class="checkbox-container">
       <input type="checkbox" id="apple"/>
-      <label class="checkbox" for="apple">Apple Mac</label>
+      <label class="checkbox" for="apple">Stack</label>
     </div>
     <div class="checkbox-container">
       <input type="checkbox" id="microsoft"/>
-      <label class="checkbox" for="microsoft">Microsoft OS</label>
+      <label class="checkbox" for="microsoft">Push</label>
     </div>
     <div class="checkbox-container">
       <input type="checkbox" id="linux"/>
-      <label class="checkbox" for="linux">Linux OS</label>
+      <label class="checkbox" for="linux">Pop</label>
     </div>
   </div>`;
 

@@ -6,7 +6,6 @@ import random
 import string
 import os
 from pymongo import message
-from passlib.hash import bcrypt
 import json
 import pymongo.database as mdb
 from bson.json_util import dumps
@@ -48,7 +47,7 @@ app = FastAPI(title="AutoClass", description="Youtube classroom")
 def get_class_name():
     return ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(5))
 
-@app.get("/create_class")
+@app.get("/create_class", tags=["Teacher"])
 def create_class(db: mdb.Database = Depends(get_db)):
 
     class_name = get_class_name()
@@ -57,7 +56,7 @@ def create_class(db: mdb.Database = Depends(get_db)):
 
     return MessageModel(message = "Class created successfully - " + class_name)
 
-@app.get("/class/{class_code}")
+@app.get("/class/{class_code}", tags=["students"])
 def join_class(class_code, db: mdb.Database = Depends(get_db)):
     
     l = db["classes"].find_one({"name": class_code})
@@ -66,8 +65,8 @@ def join_class(class_code, db: mdb.Database = Depends(get_db)):
     
     return MessageModel(message = "Joined class successfully.")
 
-@app.post("/class/{class_code}")
-def post_assignment(class_code, db: mdb.Database = Depends(get_db)):
+@app.post("/class/{class_code}/{video_code}", tags=["Teacher"])
+def post_assignment(class_code, video_code, db: mdb.Database = Depends(get_db)):
 
     l = db["classes"].find_one({"name": class_code})
     if l is None:
@@ -75,3 +74,8 @@ def post_assignment(class_code, db: mdb.Database = Depends(get_db)):
     
     url = ""
     return MessageModel(message = "Added assignment")
+
+@app.post("/assignment", tags=["students"])
+def get_new_assignment(db: mdb.Database = Depends(get_db)):
+
+    return MessageModel(message = "New assignment can be found at " + "https://www.youtube.com/watch?v=F1F2imiOJfk")
